@@ -47,8 +47,8 @@ namespace DetalhamentoDeVergalhoes
                 ElementId shapeId = rebar.GetShapeId();
                 ElementType shape = doc.GetElement(shapeId) as ElementType;
                 
-								//Cria o nome da família do item de detalhe, "Detalhe vergalhão 01", "Detalhe vergalhão 22", etc
-								String shapeName = "Detalhe vergalhão " + shape.Name;
+		//Cria o nome da família do item de detalhe, "Detalhe vergalhão 01", "Detalhe vergalhão 22", etc
+		String shapeName = "Detalhe vergalhão " + shape.Name;
 
                 //Dimensões do vergalhão, adicionar outras conforme for evoluindo, servirão para alterar a família de item de detalhe
                 Double dA = ele.LookupParameter("A").AsDouble();
@@ -58,11 +58,11 @@ namespace DetalhamentoDeVergalhoes
                 {
                     trans.Start();
 										
-										//Variável para guardar o sketchplane
+		    //Variável para guardar o sketchplane
                     SketchPlane sketchPlane;
 
                     //Pegar o SketchPlane de acordo com o tipo de vista, se for elevação ou corte o SketchPlane será a partir do plano criado anteriormente
-										if (viewType == ViewType.Elevation || viewType == ViewType.Section)
+	            if (viewType == ViewType.Elevation || viewType == ViewType.Section)
                     {
                         sketchPlane = SketchPlane.Create(doc, plano);
                     }
@@ -72,10 +72,10 @@ namespace DetalhamentoDeVergalhoes
                     }
 
                     //Define o SketchPlane da vista
-										view.SketchPlane = sketchPlane;
+		    view.SketchPlane = sketchPlane;
 
                     //Procura a família de item de detalhe com base no nome e ativa o mesmo
-										FilteredElementCollector collector = new FilteredElementCollector(doc);
+		    FilteredElementCollector collector = new FilteredElementCollector(doc);
                     IList<Element> symbols = collector.OfClass(typeof(FamilySymbol)).WhereElementIsElementType().ToElements();
 
                     FamilySymbol symbol = null;
@@ -94,9 +94,9 @@ namespace DetalhamentoDeVergalhoes
                     }
 
                     //Pega o ponto selecionado
-										XYZ pickedPoint = uidoc.Selection.PickPoint();
+		    XYZ pickedPoint = uidoc.Selection.PickPoint();
 										
-										//Cria o item de detalhe no ponto e define seus parâmetros
+		    //Cria o item de detalhe no ponto e define seus parâmetros
                     FamilyInstance familyInstance = doc.Create.NewFamilyInstance(pickedPoint,symbol,view);
                     familyInstance.LookupParameter("A").Set(dA);
                     familyInstance.LookupParameter("B").Set(dB);
